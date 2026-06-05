@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>计算机网络 - 交互演示</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0f0f1a; color: #e0e0e0; }
+        .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2rem; text-align: center; border-bottom: 2px solid #e94560; }
+        .header h1 { font-size: 2rem; color: #e94560; }
+        .header p { margin-top: .5rem; opacity: .8; }
+        .nav { display: flex; gap: .5rem; padding: 1rem; overflow-x: auto; background: #1a1a2e; }
+        .nav a { color: #e0e0e0; text-decoration: none; padding: .5rem 1rem; border-radius: 4px; white-space: nowrap; }
+        .nav a:hover { background: #e94560; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
+        .section { margin-bottom: 3rem; }
+        .section h2 { color: #e94560; border-left: 4px solid #e94560; padding-left: 1rem; margin-bottom: 1.5rem; }
+        .card { background: #1a1a2e; border-radius: 8px; padding: 1.5rem; margin-bottom: 1rem; border: 1px solid #2a2a4a; }
+        .card h3 { color: #fca311; margin-bottom: .5rem; }
+        .card p { line-height: 1.8; opacity: .9; }
+        .tag { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: .8rem; margin-right: 4px; }
+        .tag-http { background: #e94560; }
+        .tag-tcp { background: #0f3460; }
+        .tag-udp { background: #533483; }
+        .tag-ip { background: #2d6a4f; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; }
+        code { background: #2a2a4a; padding: 2px 6px; border-radius: 3px; font-size: .9rem; }
+        pre { background: #2a2a4a; padding: 1rem; border-radius: 6px; overflow-x: auto; margin: .5rem 0; }
+        .diagram { text-align: center; padding: 2rem; }
+        .diagram .arrow { color: #4ade80; }
+        .diagram .arrow-rev { color: #fca311; }
+        .footer { text-align: center; padding: 2rem; border-top: 1px solid #2a2a4a; margin-top: 2rem; opacity: .7; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>计算机网络学习中心</h1>
+        <p>基于小码哥教育课程的交互式学习演示</p>
+    </div>
+
+    <nav class="nav">
+        <a href="#osi">OSI 模型</a>
+        <a href="#tcp">TCP 三次握手</a>
+        <a href="#udp">TCP vs UDP</a>
+        <a href="#http">HTTP 报文</a>
+        <a href="#dns">DNS 解析</a>
+        <a href="#encrypt">加密技术</a>
+    </nav>
+
+    <div class="container">
+
+        <!-- OSI 模型 -->
+        <div class="section" id="osi">
+            <h2>OSI 7 层模型</h2>
+            <div class="grid">
+                <div class="card"><h3>7. 应用层</h3><p>为用户提供网络服务。协议: HTTP, FTP, SMTP, DNS, DHCP</p><span class="tag tag-http">HTTP</span><span class="tag tag-tcp">FTP</span></div>
+                <div class="card"><h3>6. 表示层</h3><p>数据格式转换、加密解密、压缩解压</p></div>
+                <div class="card"><h3>5. 会话层</h3><p>建立、管理和终止会话</p></div>
+                <div class="card"><h3>4. 传输层</h3><p>端到端传输。协议: TCP (可靠), UDP (不可靠)</p><span class="tag tag-tcp">TCP</span><span class="tag tag-udp">UDP</span></div>
+                <div class="card"><h3>3. 网络层</h3><p>路由选择、IP 地址。协议: IP, ARP, ICMP</p><span class="tag tag-ip">IP</span></div>
+                <div class="card"><h3>2. 数据链路层</h3><p>帧传输、MAC 地址。协议: CSMA/CD, PPP</p></div>
+                <div class="card"><h3>1. 物理层</h3><p>比特流传输。定义接口标准、线缆标准、传输速率</p></div>
+            </div>
+        </div>
+
+        <!-- TCP 三次握手 -->
+        <div class="section" id="tcp">
+            <h2>TCP 三次握手 / 四次挥手</h2>
+            <div class="card">
+                <h3>三次握手 (建立连接)</h3>
+                <div class="diagram">
+                    <pre>
+客户端                                   服务器
+  |      SYN=1, seq=x                    |  LISTEN
+  | ────────── SYN ───────────────>      |
+  |   SYN=1, ACK=1, seq=y, ack=x+1      |
+  | <────────── SYN+ACK ────────────     |  SYN-RCVD
+  |   ACK=1, seq=x+1, ack=y+1           |
+  | ────────── ACK ───────────────>      |  ESTABLISHED
+  |                                      |
+  | ←--------- 数据传输开始 ---------→   |
+                    </pre>
+                </div>
+                <p><strong>为什么需要 3 次握手？</strong> 防止 server 端一直等待。如果只有 2 次握手，过期的连接请求可能导致 server 误以为建立了新连接，浪费资源。</p>
+            </div>
+            <div class="card">
+                <h3>四次挥手 (释放连接)</h3>
+                <div class="diagram">
+                    <pre>
+客户端                                   服务器
+  |      FIN=1, seq=u                    |  ESTABLISHED
+  | ────────── FIN ───────────────>      |  CLOSE-WAIT
+  |      ACK=1, seq=v, ack=u+1          |
+  | <────────── ACK ────────────────     |
+  |      FIN=1, ACK=1, seq=w, ack=u+1   |  LAST-ACK
+  | <────────── FIN ────────────────     |
+  |      ACK=1, seq=u+1, ack=w+1        |
+  | ────────── ACK ───────────────>      |  CLOSED
+  |                                      |
+  | ←--- 等待 2MSL 后关闭 ---→           |
+                    </pre>
+                </div>
+                <p><strong>为什么需要 4 次挥手？</strong> TCP 是全双工模式，双方都需要独立关闭连接。第 1、2 次表示客户端不再发送数据，第 3、4 次表示服务器也不再发送数据。</p>
+            </div>
+        </div>
+
+        <!-- TCP vs UDP -->
+        <div class="section" id="udp">
+            <h2>TCP vs UDP</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>TCP <span class="tag tag-tcp">面向连接</span></h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>✅ 可靠传输</li>
+                        <li>✅ 保证顺序</li>
+                        <li>✅ 流量控制</li>
+                        <li>✅ 拥塞控制</li>
+                        <li>❌ 速度较慢</li>
+                        <li>❌ 首部大 (20+ 字节)</li>
+                        <li>📌 浏览器、文件传输、邮件</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>UDP <span class="tag tag-udp">无连接</span></h3>
+                    <ul style="list-style: none; line-height: 2;">
+                        <li>❌ 不可靠传输</li>
+                        <li>❌ 不保证顺序</li>
+                        <li>❌ 无流量控制</li>
+                        <li>❌ 无拥塞控制</li>
+                        <li>✅ 速度快</li>
+                        <li>✅ 首部小 (8 字节)</li>
+                        <li>📌 音视频通话、直播</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- HTTP 报文 -->
+        <div class="section" id="http">
+            <h2>HTTP 报文格式</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>请求报文 (Request)</h3>
+<pre>GET /index.html HTTP/1.1
+Host: www.example.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+Cookie: session=abc123
+                              ← 空行
+(请求体 - GET 通常为空)</pre>
+                </div>
+                <div class="card">
+                    <h3>响应报文 (Response)</h3>
+<pre>HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1234
+Set-Cookie: session=abc123
+Server: Apache
+                              ← 空行
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;...&lt;/html&gt;</pre>
+                </div>
+            </div>
+            <div class="card">
+                <h3>常见状态码</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: .5rem;">
+                    <div><code>200</code> OK (成功)</div>
+                    <div><code>302</code> Found (重定向)</div>
+                    <div><code>304</code> Not Modified (使用缓存)</div>
+                    <div><code>400</code> Bad Request (语法错误)</div>
+                    <div><code>401</code> Unauthorized (未认证)</div>
+                    <div><code>403</code> Forbidden (拒绝访问)</div>
+                    <div><code>404</code> Not Found (未找到)</div>
+                    <div><code>500</code> Internal Server Error (服务器错误)</div>
+                    <div><code>502</code> Bad Gateway (网关错误)</div>
+                    <div><code>503</code> Service Unavailable (服务不可用)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DNS -->
+        <div class="section" id="dns">
+            <h2>DNS 域名解析</h2>
+            <div class="card">
+                <p>用户在浏览器输入 <code>www.example.com</code> 时：</p>
+                <pre>
+1. 浏览器查询本地 DNS 缓存
+2. 本地缓存未命中 → 查询配置的 DNS 服务器
+3. DNS 服务器查询根域名服务器 → .com 服务器 → example.com 服务器
+4. 返回 IP 地址: 93.184.216.34
+5. 浏览器向该 IP 发起 HTTP 请求
+                </pre>
+                <p><strong>常用 DNS 服务器：</strong></p>
+                <ul style="line-height: 2; list-style: none;">
+                    <li>🟢 114DNS: <code>114.114.114.114</code></li>
+                    <li>🔵 Google: <code>8.8.8.8</code></li>
+                    <li>🟡 阿里: <code>223.5.5.5</code></li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- 加密技术 -->
+        <div class="section" id="encrypt">
+            <h2>加密技术</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>对称加密</h3>
+                    <p>加密和解密使用同一个密钥。</p>
+                    <p>算法: DES (已淘汰), 3DES, AES (推荐)</p>
+                    <p>⚠️ 存在<strong>密钥配送问题</strong></p>
+                </div>
+                <div class="card">
+                    <h3>非对称加密</h3>
+                    <p>使用公钥加密、私钥解密。</p>
+                    <p>算法: RSA (最广泛)</p>
+                    <p>✅ 解决密钥配送问题</p>
+                    <p>❌ 速度较慢</p>
+                </div>
+                <div class="card">
+                    <h3>混合密码系统</h3>
+                    <p>结合对称和非对称加密的优势：</p>
+                    <ol style="padding-left: 1.2rem; line-height: 1.8;">
+                        <li>用对称密钥加密消息（速度快）</li>
+                        <li>用公钥加密对称密钥（解决配送）</li>
+                    </ol>
+                    <p>📌 HTTPS 使用的就是这种方式</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <p>计算机网络学习文档 | 小码哥教育课程笔记 | 项目地址: https://github.com/CoderLiLe/hello-network</p>
+    </div>
+</body>
+</html>

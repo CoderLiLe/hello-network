@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello Network</title>
+</head>
+<body>
+    <h1>网络学习示例页面</h1>
+    <form action="/hello" method="GET">
+        <button type="submit">发送 GET 请求</button>
+    </form>
+    <form action="/hello" method="POST">
+        <button type="submit">发送 POST 请求</button>
+    </form>
+    <h2>查看 HTTP 请求信息</h2>
+    <pre id="info"></pre>
+    <script>
+        fetch('/hello')
+            .then(r => r.text())
+            .then(html => document.getElementById('info').textContent = html);
+    </script>
+</body>
+</html>

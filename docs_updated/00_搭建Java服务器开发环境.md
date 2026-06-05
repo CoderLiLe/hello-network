@@ -1,75 +1,76 @@
 # 搭建Java服务器开发环境
 
-> 原始文件: 00_搭建Java服务器开发环境.pdf
-> 生成时间: 2026-03-29 10:19:49
+> 讲师: 李明杰 (小码哥教育)
 
-## 文档说明
+## 前提条件
 
-本文档基于PDF文件 **00_搭建Java服务器开发环境.pdf** 自动生成，内容涵盖网络技术的相关知识点。
+- 下载安装 JDK（建议至少使用 JDK8）
+- 下载安装 IntelliJ IDEA Ultimate（必须安装旗舰版，社区版没有 Web 项目功能）
+- 下载解压 Tomcat
 
-## 预计内容
+## JDK 安装与配置
 
-根据文件名分析，本文档可能包含以下内容：
+### 安装步骤
+1. 下载 JDK（建议使用 JDK8 或更高版本）
+2. 安装路径建议不要包含中文等特殊字符
+3. 配置环境变量
+   - 配置 `JAVA_HOME`
+   - 配置 `Path`
 
-### 主要主题
-- 搭建Java服务器开发环境的基本概念和原理
-- 相关技术和协议详解
-- 实际应用案例
-- 配置和管理指南
+### Java 跨平台原理
+Java 的跨平台特性：**一次编译，到处运行**
+- 编译生成与平台无关的字节码文件（`.class` 文件）
+- 由对应平台的 JVM 解析字节码为机器指令
 
-### 技术要点
-1. **基础理论** - 核心概念和原理
-2. **协议分析** - 相关协议工作机制
-3. **实践配置** - 实际配置示例
-4. **故障排除** - 常见问题和解决方案
+```
+*.java → 编译 → *.class → JVM(Windows/Mac/Linux) → 机器指令
+```
 
-### 学习目标
-- 理解搭建Java服务器开发环境的基本概念
-- 掌握相关技术的配置方法
-- 能够诊断和解决常见问题
-- 能够优化网络性能
+**JVM（Java Virtual Machine）**：Java 虚拟机，是 Java 跨平台的核心。
 
-## 学习建议
+## Tomcat 服务器
 
-### 学习路径
-1. **理论学习** - 阅读文档理解概念
-2. **实践操作** - 进行实际操作练习
-3. **问题解决** - 解决实际网络问题
-4. **知识扩展** - 学习相关高级主题
+### 安装
+1. 下载 Tomcat（建议 Tomcat 9+）
+2. 解压路径建议不要包含中文等特殊字符
 
-### 时间安排
-- 基础学习: 2-4小时
-- 实践练习: 4-8小时  
-- 项目应用: 8-16小时
-- 深入学习: 根据需要
+### 部署项目
+将 Web 项目打包成 `.war` 文件，放入 Tomcat 的 `webapps` 目录，启动 Tomcat 即可自动部署。
 
-## 相关资源
+## IntelliJ IDEA 配置
 
-### 扩展阅读
-- [计算机网络教程](https://www.tutorialspoint.com/computer_fundamentals/computer_networking.htm)
-- [网络协议指南](https://www.cloudflare.com/learning/network-layer/what-is-a-network-protocol/)
-- [网络安全基础](https://www.cisco.com/c/en/us/products/security/what-is-network-security.html)
+### 创建 Web 项目
+1. **新建一个空的项目**
+2. **添加 Java 模块**
+3. **添加 Web 模块**
+   - 在模块上右键 → Add Framework Support → Web Application
+4. **部署项目到 Tomcat**
+   - Run → Edit Configurations → 添加 Tomcat Server
+   - 选择本地 Tomcat 路径
+   - Deployment 中添加要部署的 artifact
+5. **添加 Servlet 支持**
+   - 添加 Servlet API 依赖
+   - 创建 Servlet 类
+   - 配置 web.xml 或使用注解
 
-### 实践平台
-1. **GNS3** - 网络模拟器
-2. **Cisco Packet Tracer** - 网络仿真
-3. **VirtualBox** - 虚拟机环境
-4. **Docker** - 容器网络
+## 客户端-服务器架构
 
-### 社区支持
-- [Stack Overflow网络话题](https://stackoverflow.com/questions/tagged/networking)
-- [GitHub网络项目](https://github.com/topics/networking)
-- [Reddit网络社区](https://www.reddit.com/r/networking/)
+```
+浏览器(客户端) ←→ Tomcat(服务器) ←→ Java 代码
+```
 
-## 下一步行动
+- **客户端**：浏览器（HTML + CSS + JS）
+- **服务器**：Java + Tomcat
+- **请求流程**：客户端发送 HTTP 请求 → Tomcat 接收 → Java 代码处理 → 返回响应
 
-1. **获取原始文件** - 从指定路径获取完整PDF
-2. **系统学习** - 按照学习路径逐步学习
-3. **实践验证** - 通过实验验证学习成果
-4. **项目应用** - 在实际项目中应用所学知识
+## 开发工具
+
+| 工具 | 用途 |
+|------|------|
+| Chrome/Firefox | 浏览器调试 |
+| Fiddler/Wireshark | 网络抓包 |
+| Xshell | 终端模拟（Windows） |
+| Packet Tracer | 网络模拟 |
+| GNS3 | 网络模拟器 |
 
 ---
-
-*注: 本文档为学习指南，建议结合原始PDF文件进行详细学习。*
-*原始文件位置: `/Users/lile/Desktop/通用技能/网络/mj网络/00_搭建Java服务器开发环境.pdf`*
-*生成时间: 2026-03-29 10:19:49*
