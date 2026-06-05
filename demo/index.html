@@ -46,6 +46,9 @@
         <a href="#http">HTTP 报文</a>
         <a href="#dns">DNS 解析</a>
         <a href="#encrypt">加密技术</a>
+        <a href="#story">双十一故事</a>
+        <a href="#cloud">云网络</a>
+        <a href="#tools">实用命令</a>
     </nav>
 
     <div class="container">
@@ -230,8 +233,81 @@ Server: Apache
         </div>
     </div>
 
+    <!-- 双十一故事 -->
+    <div class="section" id="story">
+        <h2>双十一购物流程中的网络协议</h2>
+        <div class="card">
+            <h3>10 个阶段，40+ 协议</h3>
+            <p>从用户打开购物 App 到下单成功，网络协议贯穿始终：</p>
+            <pre>
+ ① 部署电商平台 ─ VPC/VXLAN/VPN
+ ② BGP路由广播 ─ eBGP/iBGP
+ ③ DNS域名解析 ─ DNS/HTTPDNS/GSLB
+ ④ CDN静态资源 ─ CDN/HTTP缓存
+ ⑤ 建立HTTPS连接 ─ TCP三次握手/TLS
+ ⑥ 封装网络包 ─ HTTP/TCP/IP/MAC/ARP
+ ⑦ 路由转发 ─ 移动网络/NAT/OSPF/BGP
+ ⑧ 数据中心入口 ─ NAT/VXLAN
+ ⑨ RPC调用 ─ Dubbo/Hessian2/Netty
+ ⑩ 数据入库 ─ CAS/分布式事务
+            </pre>
+            <p>详见文档：<code>故事_双十一购物流程中的网络协议.md</code></p>
+        </div>
+    </div>
+
+    <!-- 云网络 -->
+    <div class="section" id="cloud">
+        <h2>云原生网络</h2>
+        <div class="grid">
+            <div class="card">
+                <h3>VPC (虚拟私有网络)</h3>
+                <p>在云上创建隔离的虚拟网络。不同用户的 VPC 通过 VXLAN 隔离。</p>
+                <p>💡 每个 VPC 分配一个 VXLAN ID，二层完全不通</p>
+            </div>
+            <div class="card">
+                <h3>容器网络</h3>
+                <p>两主流的容器网络方案：</p>
+                <ul style="padding-left: 1.2rem; line-height: 1.8;">
+                    <li><strong>Flannel</strong>：Overlay 网络，VXLAN 封装</li>
+                    <li><strong>Calico</strong>：纯三层网络，BGP 路由</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h3>SDN (软件定义网络)</h3>
+                <p>将网络控制面和数据面分离。</p>
+                <p>📌 OpenFlow 协议、OVS (Open vSwitch)</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 实用命令 -->
+    <div class="section" id="tools">
+        <h2>常用网络排查命令</h2>
+        <div class="card">
+            <table style="width:100%; border-collapse: collapse; line-height: 2;">
+                <tr><th style="text-align:left; border-bottom:1px solid #333;">命令</th><th style="text-align:left; border-bottom:1px solid #333;">用途</th></tr>
+                <tr><td><code>ping</code></td><td>测试连通性与延迟</td></tr>
+                <tr><td><code>tracert</code></td><td>路由追踪</td></tr>
+                <tr><td><code>ifconfig</code></td><td>查看网络接口</td></tr>
+                <tr><td><code>netstat -an</code></td><td>查看端口与连接状态</td></tr>
+                <tr><td><code>nslookup</code></td><td>DNS 查询</td></tr>
+                <tr><td><code>curl -v</code></td><td>HTTP 请求调试</td></tr>
+                <tr><td><code>tcpdump</code></td><td>抓包分析</td></tr>
+                <tr><td><code>telnet</code></td><td>测试端口连通性</td></tr>
+            </table>
+        </div>
+        <div class="card">
+            <h3>快速诊断流程</h3>
+            <pre>网页打不开？
+  1. ping 域名 → DNS 解析正常？
+  2. ping IP → 网络层正常？
+  3. telnet IP 80 → TCP 端口开放？
+  4. curl -v http://IP → HTTP 正常？</pre>
+        </div>
+    </div>
+
     <div class="footer">
-        <p>计算机网络学习文档 | 小码哥教育课程笔记 | 项目地址: https://github.com/CoderLiLe/hello-network</p>
+        <p>计算机网络学习文档 | 小码哥教育 + 极客时间趣谈网络协议 | 项目地址: https://github.com/CoderLiLe/hello-network</p>
     </div>
 </body>
 </html>
