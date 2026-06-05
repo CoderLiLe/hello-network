@@ -10,7 +10,7 @@
         .header { background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%); padding: 2rem; text-align: center; border-bottom: 2px solid #e94560; }
         .header h1 { font-size: 2rem; color: #e94560; }
         .header p { margin-top: .5rem; opacity: .8; }
-        .nav { display: flex; gap: .5rem; padding: 1rem; overflow-x: auto; background: #1a1a2e; }
+        .nav { display: flex; gap: .5rem; padding: 1rem; overflow-x: auto; background: #1a1a2e; position: sticky; top: 0; z-index: 100; }
         .nav a { color: #e0e0e0; text-decoration: none; padding: .5rem 1rem; border-radius: 4px; white-space: nowrap; }
         .nav a:hover { background: #e94560; }
         .container { max-width: 1200px; margin: 0 auto; padding: 2rem; }
@@ -31,21 +31,67 @@
         .diagram .arrow { color: #4ade80; }
         .diagram .arrow-rev { color: #fca311; }
         .footer { text-align: center; padding: 2rem; border-top: 1px solid #2a2a4a; margin-top: 2rem; opacity: .7; }
+
+        .btn { display: inline-block; padding: .5rem 1.5rem; border: none; border-radius: 4px; cursor: pointer; font-size: .9rem; transition: all .2s; }
+        .btn-primary { background: #e94560; color: #fff; }
+        .btn-primary:hover { background: #d63850; }
+        .btn-primary:disabled { opacity: .4; cursor: not-allowed; }
+        .btn-secondary { background: #2a2a4a; color: #e0e0e0; margin-left: .5rem; }
+        .btn-secondary:hover { background: #3a3a5a; }
+
+        .handshake-vis { display: flex; justify-content: space-between; align-items: center; padding: 1rem 0; position: relative; min-height: 200px; }
+        .handshake-vis .side { width: 120px; text-align: center; font-weight: bold; }
+        .handshake-vis .side .box { background: #2a2a4a; border: 2px solid #4a4a6a; border-radius: 8px; padding: .8rem; margin: .5rem 0; }
+        .handshake-vis .side .box.active { border-color: #4ade80; box-shadow: 0 0 15px rgba(74, 222, 128, .3); }
+        .handshake-vis .side .box.client-active { border-color: #4ade80; }
+        .handshake-vis .side .box.server-active { border-color: #fca311; }
+
+        .arrow-line { flex: 1; height: 2px; background: #4a4a6a; position: relative; margin: 0 1rem; }
+        .arrow-line .arrow-label { position: absolute; top: -20px; left: 50%; transform: translateX(-50%); font-size: .8rem; white-space: nowrap; color: #888; }
+        .arrow-line .arrow-tip { position: absolute; right: -8px; top: -4px; width: 0; height: 0; border-left: 8px solid #4a4a6a; border-top: 5px solid transparent; border-bottom: 5px solid transparent; }
+
+        .flow-vis { display: flex; flex-direction: column; gap: .5rem; padding: 1rem 0; }
+        .flow-step { display: flex; gap: 1rem; align-items: center; padding: .5rem; border-radius: 4px; transition: all .3s; }
+        .flow-step.active { background: rgba(74, 222, 128, .1); }
+        .flow-step .step-num { width: 24px; height: 24px; border-radius: 50%; background: #2a2a4a; display: flex; align-items: center; justify-content: center; font-size: .8rem; flex-shrink: 0; }
+        .flow-step.active .step-num { background: #4ade80; color: #000; }
+        .flow-step .step-dir { width: 60px; text-align: center; font-size: .8rem; }
+        .flow-step .step-msg { flex: 1; font-family: monospace; font-size: .85rem; }
+        .flow-step .step-desc { flex: 1; font-size: .85rem; opacity: .8; }
+
+        .encap-vis { display: flex; flex-direction: column; align-items: center; padding: 1rem; }
+        .encap-layer { width: 100%; max-width: 600px; border: 2px solid; border-radius: 6px; padding: .6rem 1rem; margin: 2px 0; font-size: .85rem; display: flex; justify-content: space-between; transition: all .3s; }
+        .encap-layer.active { transform: scale(1.02); }
+        .encap-7 { border-color: #e94560; background: rgba(233, 69, 96, .1); }
+        .encap-4 { border-color: #fca311; background: rgba(252, 163, 17, .1); }
+        .encap-3 { border-color: #4ade80; background: rgba(74, 222, 128, .1); }
+        .encap-2 { border-color: #60a5fa; background: rgba(96, 165, 250, .1); }
+        .encap-1 { border-color: #a78bfa; background: rgba(167, 139, 250, .1); }
+
+        .code-link { display: inline-flex; align-items: center; gap: .3rem; background: #2a2a4a; padding: .3rem .8rem; border-radius: 4px; color: #4ade80; text-decoration: none; font-size: .85rem; margin: .2rem; }
+        .code-link:hover { background: #3a3a5a; }
+
+        .encap-controls { display: flex; gap: .5rem; justify-content: center; margin: 1rem 0; flex-wrap: wrap; }
+        .encap-controls .layer-btn { padding: .4rem 1rem; border: 1px solid #2a2a4a; border-radius: 4px; background: transparent; color: #e0e0e0; cursor: pointer; font-size: .8rem; transition: all .2s; }
+        .encap-controls .layer-btn:hover { background: #2a2a4a; }
+        .encap-controls .layer-btn.active { background: #e94560; color: #fff; border-color: #e94560; }
     </style>
 </head>
 <body>
     <div class="header">
         <h1>计算机网络学习中心</h1>
-        <p>基于小码哥教育课程的交互式学习演示</p>
+        <p>小码哥教育 + 极客时间·趣谈网络协议 | 交互演示</p>
     </div>
 
     <nav class="nav">
         <a href="#osi">OSI 模型</a>
-        <a href="#tcp">TCP 三次握手</a>
+        <a href="#tcp">TCP 交互</a>
         <a href="#udp">TCP vs UDP</a>
         <a href="#http">HTTP 报文</a>
+        <a href="#encap">封装演示</a>
         <a href="#dns">DNS 解析</a>
         <a href="#encrypt">加密技术</a>
+        <a href="#code">代码示例</a>
         <a href="#story">双十一故事</a>
         <a href="#cloud">云网络</a>
         <a href="#tools">实用命令</a>
@@ -67,44 +113,77 @@
             </div>
         </div>
 
-        <!-- TCP 三次握手 -->
+        <!-- 交互式 TCP 三次握手 -->
         <div class="section" id="tcp">
-            <h2>TCP 三次握手 / 四次挥手</h2>
+            <h2>TCP 三次握手 (交互演示)</h2>
             <div class="card">
-                <h3>三次握手 (建立连接)</h3>
-                <div class="diagram">
-                    <pre>
-客户端                                   服务器
-  |      SYN=1, seq=x                    |  LISTEN
-  | ────────── SYN ───────────────>      |
-  |   SYN=1, ACK=1, seq=y, ack=x+1      |
-  | <────────── SYN+ACK ────────────     |  SYN-RCVD
-  |   ACK=1, seq=x+1, ack=y+1           |
-  | ────────── ACK ───────────────>      |  ESTABLISHED
-  |                                      |
-  | ←--------- 数据传输开始 ---------→   |
-                    </pre>
+                <p>点击"下一步"逐步观察三次握手和四次挥手的过程：</p>
+                <div id="handshake-controls" style="margin: 1rem 0; text-align: center;">
+                    <button class="btn btn-primary" id="handshake-next">下一步 →</button>
+                    <button class="btn btn-secondary" id="handshake-reset">重置</button>
+                    <span id="handshake-status" style="margin-left: 1rem; font-size: .9rem; color: #888;">
+                        步骤 0/7
+                    </span>
                 </div>
-                <p><strong>为什么需要 3 次握手？</strong> 防止 server 端一直等待。如果只有 2 次握手，过期的连接请求可能导致 server 误以为建立了新连接，浪费资源。</p>
-            </div>
-            <div class="card">
-                <h3>四次挥手 (释放连接)</h3>
-                <div class="diagram">
-                    <pre>
-客户端                                   服务器
-  |      FIN=1, seq=u                    |  ESTABLISHED
-  | ────────── FIN ───────────────>      |  CLOSE-WAIT
-  |      ACK=1, seq=v, ack=u+1          |
-  | <────────── ACK ────────────────     |
-  |      FIN=1, ACK=1, seq=w, ack=u+1   |  LAST-ACK
-  | <────────── FIN ────────────────     |
-  |      ACK=1, seq=u+1, ack=w+1        |
-  | ────────── ACK ───────────────>      |  CLOSED
-  |                                      |
-  | ←--- 等待 2MSL 后关闭 ---→           |
-                    </pre>
+                <div id="handshake-steps" class="flow-vis">
+                    <div class="flow-step" data-step="0">
+                        <span class="step-num">0</span>
+                        <span class="step-dir">初始</span>
+                        <span class="step-msg">CLOSED → SYN-SENT</span>
+                        <span class="step-desc">客户端主动打开, 发送 SYN</span>
+                    </div>
+                    <div class="flow-step" data-step="1">
+                        <span class="step-num">1</span>
+                        <span class="step-dir">C → S</span>
+                        <span class="step-msg">SYN=1, seq=x</span>
+                        <span class="step-desc">客户端发送连接请求, 进入 SYN-SENT 状态</span>
+                    </div>
+                    <div class="flow-step" data-step="2">
+                        <span class="step-num">2</span>
+                        <span class="step-dir">S → C</span>
+                        <span class="step-msg">SYN=1, ACK=1, seq=y, ack=x+1</span>
+                        <span class="step-desc">服务器回复 SYN+ACK, 进入 SYN-RCVD 状态</span>
+                    </div>
+                    <div class="flow-step" data-step="3">
+                        <span class="step-num">3</span>
+                        <span class="step-dir">C → S</span>
+                        <span class="step-msg">ACK=1, seq=x+1, ack=y+1</span>
+                        <span class="step-desc">客户端确认, 进入 ESTABLISHED; 服务器收到后也进入 ESTABLISHED</span>
+                    </div>
+                    <div class="flow-step" data-step="4" style="border-top: 1px solid #2a2a4a; margin-top: 1rem; padding-top: 1rem;">
+                        <span class="step-num">4</span>
+                        <span class="step-dir">数据传输</span>
+                        <span class="step-msg">[ 应用数据 ]</span>
+                        <span class="step-desc">双向数据传输</span>
+                    </div>
+                    <div class="flow-step" data-step="5">
+                        <span class="step-num">5</span>
+                        <span class="step-dir">C → S</span>
+                        <span class="step-msg">FIN=1, seq=u</span>
+                        <span class="step-desc">客户端发送 FIN, 进入 FIN-WAIT-1</span>
+                    </div>
+                    <div class="flow-step" data-step="6">
+                        <span class="step-num">6</span>
+                        <span class="step-dir">S → C</span>
+                        <span class="step-msg">ACK=1, seq=v, ack=u+1</span>
+                        <span class="step-desc">服务器回复 ACK, 进入 CLOSE-WAIT; 客户端进入 FIN-WAIT-2</span>
+                    </div>
+                    <div class="flow-step" data-step="7">
+                        <span class="step-num">7</span>
+                        <span class="step-dir">S → C</span>
+                        <span class="step-msg">FIN=1, ACK=1, seq=w, ack=u+1</span>
+                        <span class="step-desc">服务器发送 FIN, 进入 LAST-ACK</span>
+                    </div>
+                    <div class="flow-step" data-step="8">
+                        <span class="step-num">8</span>
+                        <span class="step-dir">C → S</span>
+                        <span class="step-msg">ACK=1, seq=u+1, ack=w+1</span>
+                        <span class="step-desc">客户端确认, 等待 2MSL 后关闭; 服务器立即关闭</span>
+                    </div>
                 </div>
-                <p><strong>为什么需要 4 次挥手？</strong> TCP 是全双工模式，双方都需要独立关闭连接。第 1、2 次表示客户端不再发送数据，第 3、4 次表示服务器也不再发送数据。</p>
+                <div id="handshake-detail" style="margin-top: 1rem; padding: 1rem; background: #0f0f1a; border-radius: 4px; min-height: 40px; font-size: .9rem; line-height: 1.6;">
+                    💡 点击"下一步"开始演示
+                </div>
             </div>
         </div>
 
@@ -182,6 +261,48 @@ Server: Apache
             </div>
         </div>
 
+        <!-- 交互式数据封装演示 -->
+        <div class="section" id="encap">
+            <h2>数据封装与解封装 (交互演示)</h2>
+            <div class="card">
+                <p>点击各层查看数据经过每一层时添加的协议头部：</p>
+                <div class="encap-controls">
+                    <button class="layer-btn active" data-layer="all">全部展示</button>
+                    <button class="layer-btn" data-layer="7">应用层</button>
+                    <button class="layer-btn" data-layer="4">传输层</button>
+                    <button class="layer-btn" data-layer="3">网络层</button>
+                    <button class="layer-btn" data-layer="2">数据链路层</button>
+                    <button class="layer-btn" data-layer="1">物理层</button>
+                </div>
+                <div class="encap-vis" id="encap-vis">
+                    <div class="encap-layer encap-7" data-layer="7">
+                        <span>7 应用层</span>
+                        <span><code>HTTP 请求头 + 请求体 (JSON/HTML)</code></span>
+                    </div>
+                    <div class="encap-layer encap-4" data-layer="4">
+                        <span>4 传输层</span>
+                        <span><code>TCP 头 (源端口:xxxx, 目的端口:80, seq, ack, flags)</code></span>
+                    </div>
+                    <div class="encap-layer encap-3" data-layer="3">
+                        <span>3 网络层</span>
+                        <span><code>IP 头 (源IP:192.168.x.x, 目的IP:93.184.x.x, TTL, 协议=TCP)</code></span>
+                    </div>
+                    <div class="encap-layer encap-2" data-layer="2">
+                        <span>2 数据链路层</span>
+                        <span><code>MAC 帧 (源MAC, 目的MAC, 类型=0x0800, FCS)</code></span>
+                    </div>
+                    <div class="encap-layer encap-1" data-layer="1">
+                        <span>1 物理层</span>
+                        <span><code>比特流: 10110110 01010110 11100010 ...</code></span>
+                    </div>
+                </div>
+                <p style="font-size: .85rem; opacity: .7; margin-top: .5rem;">
+                    发送方: 数据从上层到下层层层添加头部 (封装) <br>
+                    接收方: 数据从下层到上层层层去除头部 (解封装)
+                </p>
+            </div>
+        </div>
+
         <!-- DNS -->
         <div class="section" id="dns">
             <h2>DNS 域名解析</h2>
@@ -231,15 +352,86 @@ Server: Apache
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- 双十一故事 -->
-    <div class="section" id="story">
-        <h2>双十一购物流程中的网络协议</h2>
-        <div class="card">
-            <h3>10 个阶段，40+ 协议</h3>
-            <p>从用户打开购物 App 到下单成功，网络协议贯穿始终：</p>
-            <pre>
+        <!-- 代码示例 -->
+        <div class="section" id="code">
+            <h2>代码示例</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>TCP/UDP Socket</h3>
+                    <p>Java + Python 实现 TCP 三次握手/四次挥手、UDP 无连接通信</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/tcp-udp">📂 tcp-udp/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>javac TcpServer.java && java TcpServer</code><br>
+                        <code>python tcp_server.py</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>HTTP</h3>
+                    <p>通过 TCP Socket 手动构造 HTTP 请求和响应的客户端与服务器</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/http">📂 http/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>python http_server.py</code><br>
+                        <code>javac HttpClient.java && java HttpClient</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>DNS 解析</h3>
+                    <p>使用系统 API 进行域名解析，展示 IPv4/IPv6 和别名</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/dns">📂 dns/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>python dns_lookup.py</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>TLS/HTTPS</h3>
+                    <p>展示 TLS 握手、证书验证和加密通信的完整流程</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/tls">📂 tls/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>python tls_client.py</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>容器网络</h3>
+                    <p>Docker Compose 展示多网络隔离与通信拓扑</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/network-topology">📂 network-topology/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>docker compose up -d</code>
+                    </div>
+                </div>
+                <div class="card">
+                    <h3>Java Web</h3>
+                    <p>Maven Servlet Web 应用，演示 HTTP 请求处理</p>
+                    <div>
+                        <a class="code-link" href="https://github.com/CoderLiLe/hello-network/tree/main/code/java-web">📂 java-web/</a>
+                    </div>
+                    <div style="margin-top: .5rem; font-size: .85rem;">
+                        <code>mvn tomcat7:run</code>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <p>📖 详见 <a href="https://github.com/CoderLiLe/hello-network/tree/main/code" style="color: #4ade80;">code/README.md</a></p>
+            </div>
+        </div>
+
+        <!-- 双十一故事 -->
+        <div class="section" id="story">
+            <h2>双十一购物流程中的网络协议</h2>
+            <div class="card">
+                <h3>10 个阶段，40+ 协议</h3>
+                <p>从用户打开购物 App 到下单成功，网络协议贯穿始终：</p>
+                <pre>
  ① 部署电商平台 ─ VPC/VXLAN/VPN
  ② BGP路由广播 ─ eBGP/iBGP
  ③ DNS域名解析 ─ DNS/HTTPDNS/GSLB
@@ -250,64 +442,146 @@ Server: Apache
  ⑧ 数据中心入口 ─ NAT/VXLAN
  ⑨ RPC调用 ─ Dubbo/Hessian2/Netty
  ⑩ 数据入库 ─ CAS/分布式事务
-            </pre>
-            <p>详见文档：<code>故事_双十一购物流程中的网络协议.md</code></p>
+                </pre>
+                <p>详见文档：<code>故事_双十一购物流程中的网络协议.md</code></p>
+            </div>
         </div>
-    </div>
 
-    <!-- 云网络 -->
-    <div class="section" id="cloud">
-        <h2>云原生网络</h2>
-        <div class="grid">
-            <div class="card">
-                <h3>VPC (虚拟私有网络)</h3>
-                <p>在云上创建隔离的虚拟网络。不同用户的 VPC 通过 VXLAN 隔离。</p>
-                <p>💡 每个 VPC 分配一个 VXLAN ID，二层完全不通</p>
-            </div>
-            <div class="card">
-                <h3>容器网络</h3>
-                <p>两主流的容器网络方案：</p>
-                <ul style="padding-left: 1.2rem; line-height: 1.8;">
-                    <li><strong>Flannel</strong>：Overlay 网络，VXLAN 封装</li>
-                    <li><strong>Calico</strong>：纯三层网络，BGP 路由</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h3>SDN (软件定义网络)</h3>
-                <p>将网络控制面和数据面分离。</p>
-                <p>📌 OpenFlow 协议、OVS (Open vSwitch)</p>
+        <!-- 云网络 -->
+        <div class="section" id="cloud">
+            <h2>云原生网络</h2>
+            <div class="grid">
+                <div class="card">
+                    <h3>VPC (虚拟私有网络)</h3>
+                    <p>在云上创建隔离的虚拟网络。不同用户的 VPC 通过 VXLAN 隔离。</p>
+                    <p>💡 每个 VPC 分配一个 VXLAN ID，二层完全不通</p>
+                </div>
+                <div class="card">
+                    <h3>容器网络</h3>
+                    <p>两主流的容器网络方案：</p>
+                    <ul style="padding-left: 1.2rem; line-height: 1.8;">
+                        <li><strong>Flannel</strong>：Overlay 网络，VXLAN 封装</li>
+                        <li><strong>Calico</strong>：纯三层网络，BGP 路由</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>SDN (软件定义网络)</h3>
+                    <p>将网络控制面和数据面分离。</p>
+                    <p>📌 OpenFlow 协议、OVS (Open vSwitch)</p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!-- 实用命令 -->
-    <div class="section" id="tools">
-        <h2>常用网络排查命令</h2>
-        <div class="card">
-            <table style="width:100%; border-collapse: collapse; line-height: 2;">
-                <tr><th style="text-align:left; border-bottom:1px solid #333;">命令</th><th style="text-align:left; border-bottom:1px solid #333;">用途</th></tr>
-                <tr><td><code>ping</code></td><td>测试连通性与延迟</td></tr>
-                <tr><td><code>tracert</code></td><td>路由追踪</td></tr>
-                <tr><td><code>ifconfig</code></td><td>查看网络接口</td></tr>
-                <tr><td><code>netstat -an</code></td><td>查看端口与连接状态</td></tr>
-                <tr><td><code>nslookup</code></td><td>DNS 查询</td></tr>
-                <tr><td><code>curl -v</code></td><td>HTTP 请求调试</td></tr>
-                <tr><td><code>tcpdump</code></td><td>抓包分析</td></tr>
-                <tr><td><code>telnet</code></td><td>测试端口连通性</td></tr>
-            </table>
-        </div>
-        <div class="card">
-            <h3>快速诊断流程</h3>
-            <pre>网页打不开？
+        <!-- 实用命令 -->
+        <div class="section" id="tools">
+            <h2>常用网络排查命令</h2>
+            <div class="card">
+                <table style="width:100%; border-collapse: collapse; line-height: 2;">
+                    <tr><th style="text-align:left; border-bottom:1px solid #333;">命令</th><th style="text-align:left; border-bottom:1px solid #333;">用途</th></tr>
+                    <tr><td><code>ping</code></td><td>测试连通性与延迟</td></tr>
+                    <tr><td><code>tracert</code></td><td>路由追踪</td></tr>
+                    <tr><td><code>ifconfig</code></td><td>查看网络接口</td></tr>
+                    <tr><td><code>netstat -an</code></td><td>查看端口与连接状态</td></tr>
+                    <tr><td><code>nslookup</code></td><td>DNS 查询</td></tr>
+                    <tr><td><code>curl -v</code></td><td>HTTP 请求调试</td></tr>
+                    <tr><td><code>tcpdump</code></td><td>抓包分析</td></tr>
+                    <tr><td><code>telnet</code></td><td>测试端口连通性</td></tr>
+                </table>
+            </div>
+            <div class="card">
+                <h3>快速诊断流程</h3>
+                <pre>网页打不开？
   1. ping 域名 → DNS 解析正常？
   2. ping IP → 网络层正常？
   3. telnet IP 80 → TCP 端口开放？
   4. curl -v http://IP → HTTP 正常？</pre>
+            </div>
         </div>
+
     </div>
 
     <div class="footer">
         <p>计算机网络学习文档 | 小码哥教育 + 极客时间趣谈网络协议 | 项目地址: https://github.com/CoderLiLe/hello-network</p>
     </div>
+
+<script>
+// =================== TCP 三次握手交互 ===================
+(function() {
+    const TOTAL_STEPS = 8;
+    let currentStep = -1;
+
+    const steps = document.querySelectorAll('.flow-step[data-step]');
+    const status = document.getElementById('handshake-status');
+    const detail = document.getElementById('handshake-detail');
+    const nextBtn = document.getElementById('handshake-next');
+    const resetBtn = document.getElementById('handshake-reset');
+
+    const details = [
+        '客户端从 CLOSED 状态主动打开, 发送 SYN 报文 (seq=x), 进入 SYN-SENT 状态。服务器处于 LISTEN 状态, 等待连接。',
+        '客户端发送 SYN=1, seq=x 的连接请求报文。这是三次握手的第 1 次。⚠️ 此时客户端还不能发送数据。',
+        '服务器收到 SYN 后, 回复 SYN=1, ACK=1, seq=y, ack=x+1, 进入 SYN-RCVD 状态。这是第 2 次握手。',
+        '客户端收到 SYN+ACK 后, 发送 ACK=1, seq=x+1, ack=y+1, 进入 ESTABLISHED 状态。服务器收到后也进入 ESTABLISHED。三次握手完成! ✅ 可以开始发送数据了。',
+        '双方进入数据传阶段。HTTP 请求/响应在此阶段传输。数据被分割成 TCP 段, 每个段都有序列号保证顺序。',
+        '数据传输完毕, 客户端主动关闭。发送 FIN=1, seq=u, 进入 FIN-WAIT-1 状态。这是四次挥手的第 1 次。',
+        '服务器回复 ACK=1, seq=v, ack=u+1, 进入 CLOSE-WAIT 状态。客户端收到后进入 FIN-WAIT-2 状态。这是第 2 次挥手。此时服务器还可以继续发送数据 (半关闭)。',
+        '服务器数据发送完毕, 发送 FIN=1, ACK=1, seq=w, ack=u+1, 进入 LAST-ACK 状态。这是第 3 次挥手。',
+        '客户端发送 ACK=1, seq=u+1, ack=w+1, 进入 TIME-WAIT 状态 (等待 2MSL)。服务器收到后立即进入 CLOSED 状态。这是第 4 次挥手。'
+    ];
+
+    function updateStep(step) {
+        currentStep = step;
+        steps.forEach((el, i) => {
+            el.classList.toggle('active', i <= step);
+        });
+        status.textContent = `步骤 ${step + 1}/${TOTAL_STEPS + 1}`;
+        if (step < 0) {
+            detail.innerHTML = '💡 点击"下一步"开始演示';
+            nextBtn.disabled = false;
+            nextBtn.textContent = '开始 →';
+        } else if (step <= TOTAL_STEPS) {
+            detail.innerHTML = `<strong>步骤 ${step}:</strong> ${details[step]}`;
+            nextBtn.disabled = false;
+            nextBtn.textContent = step < TOTAL_STEPS ? '下一步 →' : '✅ 完成';
+        }
+        if (step >= TOTAL_STEPS) {
+            nextBtn.disabled = true;
+            nextBtn.textContent = '✅ 已完成';
+        }
+    }
+
+    nextBtn.addEventListener('click', () => {
+        updateStep(currentStep + 1);
+    });
+
+    resetBtn.addEventListener('click', () => {
+        updateStep(-1);
+    });
+
+    updateStep(-1);
+})();
+
+// =================== 数据封装交互 ===================
+(function() {
+    const btns = document.querySelectorAll('.layer-btn');
+    const layers = document.querySelectorAll('.encap-layer');
+
+    btns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            btns.forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const layer = btn.dataset.layer;
+            layers.forEach(el => {
+                if (layer === 'all') {
+                    el.classList.add('active');
+                } else {
+                    el.classList.toggle('active', el.dataset.layer === layer);
+                }
+            });
+        });
+    });
+
+    layers.forEach(el => el.classList.add('active'));
+})();
+</script>
 </body>
 </html>

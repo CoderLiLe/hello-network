@@ -1,0 +1,47 @@
+# 容器网络拓扑示例
+# 演示 Docker 容器间的网络通信
+#
+# 启动: docker compose up -d
+# 测试: docker compose exec client ping web
+# 清理: docker compose down
+
+services:
+
+  # Web 服务器 - 运行 Nginx
+  web:
+    image: nginx:alpine
+    ports:
+      - "8080:80"
+    networks:
+      - frontend
+      - backend
+    volumes:
+      - ./web/index.html:/usr/share/nginx/html/index.html:ro
+
+  # API 服务器 - 运行简单的 HTTP 服务
+  api:
+    image: python:3-alpine
+    command: python -m http.server 5000
+    networks:
+      - backend
+
+  # 数据库 - Redis 缓存
+  cache:
+    image: redis:alpine
+    networks:
+      - backend
+
+  # 客户端 - 用于测试连通性
+  client:
+    image: alpine
+    command: sleep infinity
+    networks:
+      - frontend
+    depends_on:
+      - web
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge

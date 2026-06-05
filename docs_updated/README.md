@@ -60,12 +60,20 @@
 
 ### 💻 代码示例
 
-- [TCP/UDP 示例代码](../code/tcp-udp/) — Java Socket 编程
-- [Java Web 示例](../code/java-web/) — Servlet Web 应用
+| 类别 | 语言 | 说明 | 目录 |
+|------|------|------|------|
+| TCP/UDP Socket | Java + Python | 三次握手/四次挥手/无连接通信 | [`code/tcp-udp/`](../code/tcp-udp/) |
+| HTTP | Java + Python | 手动构造 HTTP 报文, 客户端与服务器 | [`code/http/`](../code/http/) |
+| DNS | Java + Python | 域名解析, IPv4/IPv6/别名 查询 | [`code/dns/`](../code/dns/) |
+| TLS/HTTPS | Python | TLS 握手, 证书验证, 加密通信 | [`code/tls/`](../code/tls/) |
+| 容器网络 | YAML + Shell | Docker Compose 多网络隔离与通信 | [`code/network-topology/`](../code/network-topology/) |
+| Java Web | Java (Maven) | Servlet Web 应用 | [`code/java-web/`](../code/java-web/) |
+
+详细索引见 [`code/README.md`](../code/README.md)
 
 ### 🎨 交互演示
 
-- [在线演示页面](../demo/index.html) — 可视化学习网络协议
+- [在线演示页面](../demo/index.html) — 可视化学习网络协议, 含 TCP 交互动画 & 数据封装演示
 
 ## 核心技术要点
 
