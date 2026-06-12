@@ -1,4 +1,4 @@
-# 第16讲附录：DNS与HTTPDNS
+# 第19讲附录：DNS与HTTPDNS
 
 > 本文件内容已合并至第18讲（DNS协议）。此为原始 HTTPDNS 篇，保留备查。
 >

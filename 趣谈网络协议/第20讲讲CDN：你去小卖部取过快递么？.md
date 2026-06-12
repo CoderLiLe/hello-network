@@ -1,4 +1,4 @@
-# 第17讲 CDN
+# 第20讲 CDN
 
 CDN（Content Delivery Network，内容分发网络）将内容缓存到离用户最近的边缘节点。
 

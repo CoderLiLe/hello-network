@@ -1,4 +1,4 @@
-# 第31讲 RESTful 接口（JSON）
+# 第34讲 RESTful 接口（JSON）
 
 SOAP 的 S（Simple）名不副实。HTTP 本身有 GET/POST/PUT/DELETE 对应 CRUD，不必全用 POST。
 

@@ -1,4 +1,4 @@
-# 第26讲附录：Calico 深入
+# 第31讲附录：Calico 深入
 
 > 本文件内容已合并至第30讲（Flannel 与 Calico）。此为原始 Calico 篇，保留备查。
 >

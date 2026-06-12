@@ -1,4 +1,4 @@
-# 第6讲 ICMP与ping
+# 第7讲 ICMP与ping
 
 ICMP（Internet Control Message Protocol，互联网控制报文协议）封装在 IP 包内，用于传递网络控制信息。
 

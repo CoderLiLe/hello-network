@@ -1,4 +1,4 @@
-# 第29讲 RPC 协议综述
+# 第32讲 RPC 协议综述
 
 远程调用（Remote Procedure Call）让调用远端服务像调用本地函数一样。Bruce Jay Nelson 的论文 *Implementing Remote Procedure Calls* 定义了 RPC 标准模型。
 
